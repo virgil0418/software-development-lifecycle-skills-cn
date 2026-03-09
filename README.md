@@ -82,9 +82,11 @@ Fetch and follow instructions from https://raw.githubusercontent.com/virgil0418/
    ├─ 需求澄清/
    ├─ 技术方案/
    ├─ 任务拆解/
+   ├─ 测试先行/
    ├─ 编码实施/
    ├─ 测试验证/
    ├─ 代码评审/
+   ├─ 系统化调试/
    ├─ 缺陷修复/
    ├─ 交付收尾/
    ├─ WORKING/
@@ -101,9 +103,11 @@ Fetch and follow instructions from https://raw.githubusercontent.com/virgil0418/
 - 需求澄清
 - 技术方案
 - 任务拆解
+- 测试先行
 - 编码实施
 - 测试验证
 - 代码评审
+- 系统化调试
 - 缺陷修复
 - 交付收尾
 
@@ -125,10 +129,12 @@ Fetch and follow instructions from https://raw.githubusercontent.com/virgil0418/
 - 目标不清时，用 `需求澄清`
 - 方案未定时，用 `技术方案`
 - 任务过大时，用 `任务拆解`
+- 新增功能、修 bug、改行为并准备进入实现时，用 `测试先行`
 - 开始落代码时，用 `编码实施`
 - 需要证明结果时，用 `测试验证`
 - 需要质量把关时，用 `代码评审`
-- 出现 bug 时，用 `缺陷修复`
+- 出现 bug 且根因未明时，用 `系统化调试`
+- 根因已明确、需要进入修复时，用 `缺陷修复`
 - 准备结束时，用 `交付收尾`
 
 ### 方式二：由 `生命周期总控` 分流
@@ -161,7 +167,7 @@ python scripts/run_scenario_checks.py
 当前版本已经包含：
 
 - 多工具安装入口
-- 11 个中文 skill
+- 13 个中文 skill
 - 8 个模板
 - 3 个场景示例
 - 2 个基础校验脚本
