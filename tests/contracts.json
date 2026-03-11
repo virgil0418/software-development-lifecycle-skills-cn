@@ -1,0 +1,273 @@
+[
+  {
+    "name": "lifecycle-routes-bug-to-debugging",
+    "check_type": "skill_text",
+    "target": "skills/生命周期总控/SKILL.md",
+    "must_contain": [
+      "先切到「系统化调试」",
+      "优先切到「测试先行」"
+    ],
+    "must_not_contain": [
+      "出现异常、bug、回归、线上告警时，切到「缺陷修复」"
+    ]
+  },
+  {
+    "name": "lifecycle-has-required-dependency-chain",
+    "check_type": "skill_text",
+    "target": "skills/生命周期总控/SKILL.md",
+    "must_contain": [
+      "## 强制依赖链",
+      "必须",
+      "「完成验证」是全局纪律",
+      "接收评审",
+      "任何试图绕过这些强制依赖的理由"
+    ],
+    "must_not_contain": []
+  },
+  {
+    "name": "debugging-has-iron-law-and-discipline",
+    "check_type": "skill_text",
+    "target": "skills/系统化调试/SKILL.md",
+    "must_contain": [
+      "已知证据",
+      "根因假设",
+      "已排查 / 已排除项",
+      "## 停止条件",
+      "## 铁律",
+      "没有根因定位，就不许提交修复",
+      "## 合理化反驳表",
+      "## 红旗清单",
+      "3 次失败后必须升级",
+      "## 强制依赖",
+      "【必须】`完成验证`"
+    ],
+    "must_not_contain": []
+  },
+  {
+    "name": "test-first-has-iron-law-and-discipline",
+    "check_type": "skill_text",
+    "target": "skills/测试先行/SKILL.md",
+    "must_contain": [
+      "failing test",
+      "最小实现范围",
+      "不要在没有 failing test 的情况下直接进入实现",
+      "## 铁律",
+      "没有 failing test，就不许写实现代码",
+      "## 合理化反驳表",
+      "## 红旗清单",
+      "Red-Green-Refactor"
+    ],
+    "must_not_contain": []
+  },
+  {
+    "name": "completion-verification-has-iron-law-and-gate",
+    "check_type": "skill_text",
+    "target": "skills/完成验证/SKILL.md",
+    "must_contain": [
+      "## 铁律",
+      "没有验证证据，就不许宣称完成",
+      "## 门控流程",
+      "确定",
+      "执行",
+      "阅读",
+      "确认",
+      "## 合理化反驳表",
+      "## 红旗清单",
+      "运行命令"
+    ],
+    "must_not_contain": []
+  },
+  {
+    "name": "receiving-review-has-discipline",
+    "check_type": "skill_text",
+    "target": "skills/接收评审/SKILL.md",
+    "must_contain": [
+      "## 铁律",
+      "不验证，不实现",
+      "## 禁止行为",
+      "## 澄清优先",
+      "## 推回方法",
+      "## 合理化反驳表",
+      "## 红旗清单",
+      "## 强制依赖",
+      "【必须】`完成验证`"
+    ],
+    "must_not_contain": []
+  },
+  {
+    "name": "implementation-has-execution-rhythm",
+    "check_type": "skill_text",
+    "target": "skills/编码实施/SKILL.md",
+    "must_contain": [
+      "## 前置检查",
+      "## 执行节奏",
+      "步骤 1：重申目标",
+      "步骤 2：最小实现",
+      "步骤 3：运行验证",
+      "步骤 4：提交",
+      "步骤 5：检查是否继续",
+      "## 阻塞处理",
+      "## 质量 Gate",
+      "## 强制依赖",
+      "【必须】`测试先行`",
+      "【必须】`完成验证`"
+    ],
+    "must_not_contain": []
+  },
+  {
+    "name": "code-review-has-prerequisites-and-severity",
+    "check_type": "skill_text",
+    "target": "skills/代码评审/SKILL.md",
+    "must_contain": [
+      "## 前置条件",
+      "【必须】`完成验证`已通过",
+      "严重",
+      "重要",
+      "建议",
+      "可接受风险",
+      "## 强制依赖",
+      "发起评审"
+    ],
+    "must_not_contain": []
+  },
+  {
+    "name": "verification-has-contracts-and-gaps",
+    "check_type": "skill_text",
+    "target": "skills/测试验证/SKILL.md",
+    "must_contain": [
+      "API / 模块契约验证结论",
+      "验证缺口",
+      "未覆盖风险",
+      "## 强制依赖",
+      "【必须】`完成验证`"
+    ],
+    "must_not_contain": []
+  },
+  {
+    "name": "delivery-has-required-dependencies",
+    "check_type": "skill_text",
+    "target": "skills/交付收尾/SKILL.md",
+    "must_contain": [
+      "## 强制依赖",
+      "【必须】`完成验证`",
+      "【必须】`代码评审`"
+    ],
+    "must_not_contain": []
+  },
+  {
+    "name": "bugfix-has-required-dependencies",
+    "check_type": "skill_text",
+    "target": "skills/缺陷修复/SKILL.md",
+    "must_contain": [
+      "## 强制依赖",
+      "【必须】`系统化调试`",
+      "【必须】`测试先行`",
+      "【必须】`完成验证`"
+    ],
+    "must_not_contain": []
+  },
+  {
+    "name": "verification-template-has-structure",
+    "check_type": "skill_text",
+    "target": "templates/测试验证模板.md",
+    "must_contain": [
+      "## API / 模块契约验证结论",
+      "## 验证缺口",
+      "## 未覆盖风险"
+    ],
+    "must_not_contain": []
+  },
+  {
+    "name": "task-decomposition-has-precision-rules",
+    "check_type": "skill_text",
+    "target": "skills/任务拆解/SKILL.md",
+    "must_contain": [
+      "## 铁律",
+      "无精确路径不成任务",
+      "无验证命令不成步骤",
+      "文件结构前置",
+      "Red-Green-Refactor"
+    ],
+    "must_not_contain": []
+  },
+  {
+    "name": "skill-writing-has-pressure-testing",
+    "check_type": "skill_text",
+    "target": "skills/技能编写/SKILL.md",
+    "must_contain": [
+      "## 铁律",
+      "压力场景",
+      "RED",
+      "GREEN",
+      "REFACTOR"
+    ],
+    "must_not_contain": []
+  },
+  {
+    "name": "output-测试验证",
+    "check_type": "skill_output",
+    "skill": "测试验证",
+    "must_contain": [
+      "验收标准",
+      "测试范围",
+      "测试方法",
+      "API / 模块契约验证结论",
+      "测试结果",
+      "验证缺口",
+      "未覆盖风险",
+      "结论"
+    ],
+    "must_not_contain": [
+      "理论上通过",
+      "应该没问题",
+      "代码能跑就是通过"
+    ]
+  },
+  {
+    "name": "output-系统化调试",
+    "check_type": "skill_output",
+    "skill": "系统化调试",
+    "must_contain": [
+      "问题现象",
+      "影响范围",
+      "已知证据",
+      "复现",
+      "根因假设",
+      "已排查",
+      "下一步"
+    ],
+    "must_not_contain": [
+      "已经修复",
+      "无需验证"
+    ]
+  },
+  {
+    "name": "output-测试先行",
+    "check_type": "skill_output",
+    "skill": "测试先行",
+    "must_contain": [
+      "本次行为变化",
+      "最小测试目标",
+      "失败",
+      "最小实现范围",
+      "当前测试结果"
+    ],
+    "must_not_contain": [
+      "先写完再补测试"
+    ]
+  },
+  {
+    "name": "output-测试验证模板",
+    "check_type": "skill_output",
+    "skill": "测试验证模板",
+    "must_contain": [
+      "## API / 模块契约验证结论",
+      "## 验证缺口",
+      "## 未覆盖风险",
+      "当前结论：通过 / 有条件通过 / 不通过 / 暂不能判断"
+    ],
+    "must_not_contain": [
+      "理论上通过"
+    ]
+  }
+]

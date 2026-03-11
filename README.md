@@ -15,6 +15,10 @@
 - 当前优先提供 `Codex` 与 `OpenCode` 的安装入口
 - 后续可以继续扩展到支持本地 skills 或插件机制的其他 coding agent
 
+## 能力地图
+
+仓库整体 skill 关系、职责边界与典型链路见 `docs/能力地图.md`。
+
 ## 安装
 
 ### Codex
@@ -77,6 +81,7 @@ Fetch and follow instructions from https://raw.githubusercontent.com/virgil0418/
 │  └─ lessons模板.md
 ├─ examples/
 ├─ scripts/
+├─ tests/
 └─ skills/
    ├─ 生命周期总控/
    ├─ 需求澄清/
@@ -85,17 +90,20 @@ Fetch and follow instructions from https://raw.githubusercontent.com/virgil0418/
    ├─ 测试先行/
    ├─ 编码实施/
    ├─ 测试验证/
-   ├─ 代码评审/
+   ├─ 代码评审/          # 发起评审
+   ├─ 接收评审/          # 接收评审反馈
    ├─ 系统化调试/
    ├─ 缺陷修复/
    ├─ 交付收尾/
+   ├─ 完成验证/          # 全局纪律
    ├─ WORKING/
-   └─ lessons/
+   ├─ lessons/
+   └─ 技能编写/
 ```
 
 ## 能力分层
 
-本仓库现在包含三层能力：
+本仓库现在包含四层能力：
 
 ### 生命周期主线
 
@@ -106,10 +114,16 @@ Fetch and follow instructions from https://raw.githubusercontent.com/virgil0418/
 - 测试先行
 - 编码实施
 - 测试验证
-- 代码评审
+- 代码评审（发起评审）
+- 接收评审（接收反馈）
 - 系统化调试
 - 缺陷修复
 - 交付收尾
+
+### 执行纪律
+
+- `完成验证`：全局门控纪律，没有验证证据就不许宣称完成
+- 强制依赖链：关键 skill 之间的 REQUIRED 级别前置条件
 
 ### 文档决策增强
 
@@ -122,6 +136,10 @@ Fetch and follow instructions from https://raw.githubusercontent.com/virgil0418/
 - `WORKING`：维护项目当前动态工作文档
 - `lessons`：沉淀可复用的经验、反模式与默认做法
 
+### 元能力
+
+- `技能编写`：用 TDD 方法编写和加固 skill
+
 ## 使用方式
 
 ### 方式一：按阶段使用生命周期 skill
@@ -133,6 +151,7 @@ Fetch and follow instructions from https://raw.githubusercontent.com/virgil0418/
 - 开始落代码时，用 `编码实施`
 - 需要证明结果时，用 `测试验证`
 - 需要质量把关时，用 `代码评审`
+- 收到评审反馈需要处理时，用 `接收评审`
 - 出现 bug 且根因未明时，用 `系统化调试`
 - 根因已明确、需要进入修复时，用 `缺陷修复`
 - 准备结束时，用 `交付收尾`
@@ -150,26 +169,40 @@ Fetch and follow instructions from https://raw.githubusercontent.com/virgil0418/
 
 ## 仓库校验
 
-### 校验 skill 结构
+统一入口：`scripts/skill_eval.py`，需要 `PYTHONPATH=scripts`。
+
+### 全量校验（结构 + 场景 + 契约）
 
 ```bash
-python scripts/validate_skills.py
+PYTHONPATH=scripts python scripts/skill_eval.py check
 ```
 
-### 校验示例场景完整性
+加 `--json` 可追加 JSON 摘要输出。
+
+### 校验 agent 产出是否满足输出契约
 
 ```bash
-python scripts/run_scenario_checks.py
+PYTHONPATH=scripts python scripts/skill_eval.py output --skill 测试验证 --file path/to/output.md
 ```
+
+### 对比两份 agent 产出
+
+```bash
+PYTHONPATH=scripts python scripts/skill_eval.py compare --skill 测试验证 --a a.md --b b.md
+```
+
+契约定义位于 `tests/contracts.json`，包含 `skill_text`（校验仓库内 skill 定义）和 `skill_output`（校验 agent 实际产出）两类规则。
 
 ## 当前状态
 
 当前版本已经包含：
 
 - 多工具安装入口
-- 13 个中文 skill
+- 16 个中文 skill（含 `完成验证` 纪律 skill 和 `接收评审` skill）
 - 8 个模板
 - 3 个场景示例
-- 2 个基础校验脚本
+- 统一评估工具（`skill_eval.py` + `skill_eval_core.py`）
+- 18 条契约测试规则
+- 强制依赖链（REQUIRED 级别前置条件）
 
-当前仓库已经从“生命周期 skill 库”升级为“生命周期 + 文档机制 + 经验沉淀”的完整工作流仓库。
+当前仓库已经从"生命周期 skill 库"升级为"生命周期 + 执行纪律 + 文档机制 + 经验沉淀 + 强制依赖 + 统一评估"的完整工作流仓库。

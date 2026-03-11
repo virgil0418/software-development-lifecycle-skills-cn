@@ -40,16 +40,15 @@
 - `README.md`
 - `templates/`
 - `examples/`
-- `scripts/validate_skills.py`
+- `docs/能力地图.md`
 
 ## 提交前检查
 
 运行：
 
 ```bash
-python scripts/validate_skills.py
-python scripts/run_scenario_checks.py
+PYTHONPATH=scripts python scripts/skill_eval.py check
 ```
 
-确认没有报错后再提交。
+确认结构校验、场景校验、契约校验全部通过后再提交。
 
