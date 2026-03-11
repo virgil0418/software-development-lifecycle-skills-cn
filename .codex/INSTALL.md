@@ -35,3 +35,8 @@ ls ~/.agents/skills/software-development-lifecycle-skills-cn
 
 确认能看到指向本仓库 `skills/` 的链接或目录映射。
 
+## 更新
+
+```bash
+cd ~/.codex/software-development-lifecycle-skills-cn && git pull
+```

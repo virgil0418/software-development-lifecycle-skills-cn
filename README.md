@@ -12,7 +12,7 @@
 
 - skill 内容本身是 agent-neutral 的
 - 安装方式因不同工具而不同
-- 当前优先提供 `Codex` 与 `OpenCode` 的安装入口
+- 当前提供 `Claude Code`、`Codex`、`OpenCode` 的完整接入入口
 - 后续可以继续扩展到支持本地 skills 或插件机制的其他 coding agent
 
 ## 能力地图
@@ -20,6 +20,15 @@
 仓库整体 skill 关系、职责边界与典型链路见 `docs/能力地图.md`。
 
 ## 安装
+
+### Claude Code（推荐）
+
+```bash
+claude plugin marketplace add virgil0418/software-development-lifecycle-skills-cn
+claude plugin install software-development-lifecycle-skills-cn@sdlc-skills-cn-dev
+```
+
+详细说明见 `docs/README.claude.md`。
 
 ### Codex
 
@@ -40,6 +49,24 @@ Fetch and follow instructions from https://raw.githubusercontent.com/virgil0418/
 ```
 
 详细说明见 `docs/README.opencode.md`。
+
+### 工作原理概览
+
+| 工具 | 接入方式 | Bootstrap 方式 |
+|------|----------|----------------|
+| Claude Code | `.claude-plugin/` + `hooks/` | SessionStart hook 注入 `生命周期总控` |
+| Codex | `.codex/INSTALL.md` + `~/.agents/skills/` | 依赖原生 skills 发现 |
+| OpenCode | OpenCode plugin + skills symlink | `.opencode/plugins/software-development-lifecycle-skills-cn.js` 注入 `生命周期总控` |
+
+## 命令入口
+
+为兼容 `superpowers` 风格的用户习惯，仓库新增 `commands/` 目录作为命令兼容层。
+
+- `commands/brainstorm.md`：引导转向 `生命周期总控`、`需求澄清`、`技术方案`
+- `commands/write-plan.md`：引导转向 `任务拆解`
+- `commands/execute-plan.md`：引导转向 `测试先行`、`编码实施`、`测试验证`
+
+这些命令当前不承载复杂逻辑，重点是把“命令式入口”平滑映射到本仓库的中文 skill 体系。
 
 ## 设计原则
 
@@ -70,6 +97,17 @@ Fetch and follow instructions from https://raw.githubusercontent.com/virgil0418/
 ├─ README.md
 ├─ ROADMAP.md
 ├─ CONTRIBUTING.md
+├─ .claude-plugin/        # Claude Code plugin 配置
+│  ├─ plugin.json
+│  └─ marketplace.json
+├─ .opencode/
+│  ├─ INSTALL.md
+│  └─ plugins/            # OpenCode plugin 注入层
+├─ commands/              # superpowers 风格命令兼容入口
+├─ hooks/                 # Claude Code SessionStart hook
+│  ├─ hooks.json
+│  ├─ run-hook.cmd
+│  └─ session-start
 ├─ templates/
 │  ├─ 需求说明模板.md
 │  ├─ 技术方案模板.md
@@ -198,6 +236,8 @@ PYTHONPATH=scripts python scripts/skill_eval.py compare --skill 测试验证 --a
 当前版本已经包含：
 
 - 多工具安装入口
+- OpenCode plugin 注入层
+- `commands/` 命令兼容层
 - 16 个中文 skill（含 `完成验证` 纪律 skill 和 `接收评审` skill）
 - 8 个模板
 - 3 个场景示例

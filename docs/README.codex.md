@@ -32,9 +32,22 @@ New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.agents\skills"
 cmd /c mklink /J "$env:USERPROFILE\.agents\skills\software-development-lifecycle-skills-cn" "$env:USERPROFILE\.codex\software-development-lifecycle-skills-cn\skills"
 ```
 
+## 验证
+
+```bash
+ls -la ~/.agents/skills/software-development-lifecycle-skills-cn
+```
+
+确认它指向仓库下的 `skills/`，然后重启 Codex，新会话应能发现 `生命周期总控` 与其余 skill。
+
+## 更新
+
+```bash
+cd ~/.codex/software-development-lifecycle-skills-cn && git pull
+```
+
 ## 工作原理
 
 Codex 会扫描本地 skills 目录，并按 `SKILL.md` 的 frontmatter 判断何时触发 skill。
 
 因此，这个仓库不是“Codex 专用内容”，只是当前提供了对 Codex 友好的安装入口。
-

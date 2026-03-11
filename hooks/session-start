@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# SessionStart hook for 软件开发全生命周期技能库 plugin
+# Injects the 生命周期总控 skill content into Claude Code session context.
+
+set -euo pipefail
+
+# Determine plugin root directory
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
+PLUGIN_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+
+# Read 生命周期总控 content as the bootstrap skill
+bootstrap_content=$(cat "${PLUGIN_ROOT}/skills/生命周期总控/SKILL.md" 2>&1 || echo "Error reading 生命周期总控 skill")
+
+# Escape string for JSON embedding using bash parameter substitution.
+escape_for_json() {
+    local s="$1"
+    s="${s//\\/\\\\}"
+    s="${s//\"/\\\"}"
+    s="${s//$'\n'/\\n}"
+    s="${s//$'\r'/\\r}"
+    s="${s//$'\t'/\\t}"
+    printf '%s' "$s"
+}
+
+bootstrap_escaped=$(escape_for_json "$bootstrap_content")
+session_context="<EXTREMELY_IMPORTANT>\n你已装备「软件开发全生命周期技能库」。\n\n**以下是「生命周期总控」skill 的完整内容——你的技能入口。对于其他 skill，请使用 Skill 工具调用：**\n\n${bootstrap_escaped}\n</EXTREMELY_IMPORTANT>"
+
+# Output context injection as JSON.
+# Keep both shapes for compatibility:
+# - Cursor hooks expect additional_context.
+# - Claude hooks expect hookSpecificOutput.additionalContext.
+cat <<EOF
+{
+  "additional_context": "${session_context}",
+  "hookSpecificOutput": {
+    "hookEventName": "SessionStart",
+    "additionalContext": "${session_context}"
+  }
+}
+EOF
+
+exit 0

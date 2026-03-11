@@ -1,0 +1,12 @@
+{
+  "name": "software-development-lifecycle-skills-cn",
+  "description": "中文软件开发全生命周期技能库：需求澄清、技术方案、任务拆解、测试先行、编码实施、系统化调试、代码评审、交付收尾等 16 个 skill",
+  "version": "0.4.0",
+  "author": {
+    "name": "virgil0418"
+  },
+  "homepage": "https://github.com/virgil0418/software-development-lifecycle-skills-cn",
+  "repository": "https://github.com/virgil0418/software-development-lifecycle-skills-cn",
+  "license": "MIT",
+  "keywords": ["skills", "lifecycle", "tdd", "debugging", "chinese", "软件开发", "生命周期"]
+}
