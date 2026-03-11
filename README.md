@@ -19,6 +19,8 @@
 
 仓库整体 skill 关系、职责边界与典型链路见 `docs/能力地图.md`。
 
+其中包含一张仓库分层架构图，可快速理解 skill、平台接入层、模板、校验与文档之间的关系。
+
 ## 安装
 
 ### Claude Code（推荐）
@@ -95,7 +97,6 @@ Fetch and follow instructions from https://raw.githubusercontent.com/virgil0418/
 ```text
 软件开发全生命周期技能库/
 ├─ README.md
-├─ ROADMAP.md
 ├─ CONTRIBUTING.md
 ├─ .claude-plugin/        # Claude Code plugin 配置
 │  ├─ plugin.json
