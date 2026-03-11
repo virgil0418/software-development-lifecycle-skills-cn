@@ -1,27 +1,66 @@
 # 软件开发全生命周期技能库
 
-这是一个面向多种 coding agent 的中文 skill 仓库，用来把软件开发从“直接写代码”升级为“先澄清、再设计、再拆解、再实施、再验证、再收尾”的标准化流程，并补齐项目过程文档与经验沉淀能力。
+> 面向 coding agent 的中文 skill 工作流：先澄清、再设计、再拆解、再实施、再验证、再交付，并把过程文档与项目记忆沉淀下来。
 
-仓库参考了 `superpowers` 的阶段化思想，也参考了 `opencode_ios_client` 的文档分层方法，但核心目标不是复制某一个模板，而是建立一套可持续产出高质量设计文档、工作记录和经验沉淀的中文 skill 系统。
+这不是一个“提示词合集”，而是一套可复用的软件工程开发生命周期（SDLC）工作流：当你让 agent 写代码时，它应先把目标、边界与验收说清楚，再做方案决策，再拆解任务，再进入实现与验证，最后交付收尾。
 
-## 平台定位
+本仓库参考了 `superpowers` 的阶段化思想，也参考了 `opencode_ios_client` 的文档分层方法，但核心目标不是复制某一个模板，而是建立一套可持续产出高质量设计文档、工作记录和经验沉淀的中文 skill 系统。
 
-这个仓库不应该被理解为“Codex 专用”。
+## 你会得到什么
 
-更准确的定位是：
+- 可复用的生命周期主线：从需求澄清到交付收尾，减少“过早写代码”的失败。
+- 更稳定的交付证据：用测试与验证说明“为什么算完成”，而不是口头保证。
+- 项目记忆（差异化能力）：`WORKING` 记录当前事实，`lessons` 沉淀可复用经验，避免多轮对话后偏航。
+- 多平台接入：同一套 skill 可用于 `Claude Code`、`Codex`、`OpenCode`。
 
-- skill 内容本身是 agent-neutral 的
-- 安装方式因不同工具而不同
-- 当前提供 `Claude Code`、`Codex`、`OpenCode` 的完整接入入口
-- 后续可以继续扩展到支持本地 skills 或插件机制的其他 coding agent
+## 它如何改变 agent 的工作方式
 
-## 能力地图
+装上这套 skill 后，理想状态下的 agent 不应再这样工作：
 
-仓库整体 skill 关系、职责边界与典型链路见 `docs/能力地图.md`。
+- 听到需求就直接写代码
+- 只记住当前对话，忘记前面已经确认过的决策
+- 测一下能跑就说“完成了”
 
-其中包含一张仓库分层架构图，可快速理解 skill、平台接入层、模板、校验与文档之间的关系。
+它应更接近下面这条行为链：
+
+1. 先由 `生命周期总控` 判断当前所处阶段，而不是盲目进入实现。
+2. 如果问题还不清楚，就先进入 `需求澄清`，把目标、范围、约束和验收定义清楚。
+3. 如果需求已经明确，但做法还没定，就进入 `技术方案`，比较方案、写清取舍与风险。
+4. 如果方案已定但任务过大，就用 `任务拆解` 把设计转成可执行、可验证的步骤。
+5. 真正动手实现前，先经过 `测试先行`，再进入 `编码实施`。
+6. 实现完成后，不靠口头保证，而是通过 `测试验证`、`代码评审`、`接收评审` 和必要的 `缺陷修复` 来证明结果。
+7. 最后由 `交付收尾` 输出变更说明、验证证据、剩余风险与后续事项。
+
+## 典型 Lifecycle Flow
+
+最典型的一条主线如下：
+
+`生命周期总控` → `需求澄清` → `技术方案` → `任务拆解` → `测试先行` → `编码实施` → `测试验证` → `代码评审` / `接收评审` → `交付收尾`
+
+如果是缺陷场景，链路通常变成：
+
+`生命周期总控` → `系统化调试` → `缺陷修复` → `测试验证` → `交付收尾`
+
+## 项目记忆：WORKING 与 lessons
+
+很多 agent 在复杂项目里失败，不是不会写代码，而是缺少稳定的上下文锚点。为此本仓库把记录机制提升为一等能力：
+
+- `WORKING`：维护项目“现在到底是什么状态”，包括已确认结论、阻塞、实测结果与下一步。
+- `lessons`：沉淀“下次仍然会遇到的问题”，包括默认做法、踩坑、复盘与反模式。
+
+这两者共同降低重复讨论、遗忘决策、偏离目标的概率。
+
+## 全局纪律
+
+- `完成验证`：没有验证证据，不允许宣称完成。
+
+## 能力地图（含架构图）
+
+仓库整体 skill 关系、职责边界与典型链路见 [docs/能力地图.md](docs/能力地图.md)。
 
 ## 安装
+
+安装方式因工具而不同，但 skill 内容本身是 agent-neutral 的。
 
 ### Claude Code（推荐）
 
@@ -52,6 +91,18 @@ Fetch and follow instructions from https://raw.githubusercontent.com/virgil0418/
 
 详细说明见 `docs/README.opencode.md`。
 
+### 验证安装（建议）
+
+- `Claude Code`：开启新会话，确认 skill 可见，并能触发 `生命周期总控` 引导。
+- `Codex`：重启后确认能发现本仓库 skill；最小验证是让它先进入阶段判断再行动。
+- `OpenCode`：确认 OpenCode plugin 与 skills 的软链接存在，且会话启动时预加载 `生命周期总控`。OpenCode plugin 入口见 `.opencode/plugins/software-development-lifecycle-skills-cn.js`。
+
+### 更新
+
+- `Claude Code`：`claude plugin update software-development-lifecycle-skills-cn`
+- `Codex`：`cd ~/.codex/software-development-lifecycle-skills-cn && git pull`
+- `OpenCode`：`cd ~/.config/opencode/software-development-lifecycle-skills-cn && git pull`
+
 ### 工作原理概览
 
 | 工具 | 接入方式 | Bootstrap 方式 |
@@ -70,7 +121,7 @@ Fetch and follow instructions from https://raw.githubusercontent.com/virgil0418/
 
 这些命令当前不承载复杂逻辑，重点是把“命令式入口”平滑映射到本仓库的中文 skill 体系。
 
-## 设计原则
+## 设计原则（为什么这样做）
 
 ### 1. 先定义成功，再开始实现
 
@@ -140,7 +191,7 @@ Fetch and follow instructions from https://raw.githubusercontent.com/virgil0418/
    └─ 技能编写/
 ```
 
-## 能力分层
+## 能力分层（参考）
 
 本仓库现在包含四层能力：
 
@@ -179,7 +230,7 @@ Fetch and follow instructions from https://raw.githubusercontent.com/virgil0418/
 
 - `技能编写`：用 TDD 方法编写和加固 skill
 
-## 使用方式
+## 使用方式（快速选择）
 
 ### 方式一：按阶段使用生命周期 skill
 
@@ -195,11 +246,11 @@ Fetch and follow instructions from https://raw.githubusercontent.com/virgil0418/
 - 根因已明确、需要进入修复时，用 `缺陷修复`
 - 准备结束时，用 `交付收尾`
 
-### 方式二：由 `生命周期总控` 分流
+### 方式二：默认从 `生命周期总控` 开始
 
 先触发 `生命周期总控`，再由它判断当前阶段与是否需要补充 `WORKING` / `lessons`。
 
-### 方式三：文档机制独立触发
+### 方式三：单独使用项目记忆机制
 
 以下情况即使不在正式生命周期阶段，也适合触发：
 
